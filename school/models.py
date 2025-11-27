@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, String, Date, DateTime, Text,
+    Column, Integer, String, Date, DateTime, Text, Float,
 )
 from .db import Base
 
@@ -11,8 +11,10 @@ class Student(Base):
     student_id = Column('id', Integer, primary_key=True, nullable=False)
     first_name = Column('first_name', String(length=64), nullable=False)
     last_name = Column('last_name', String(length=64), nullable=False)
-    birthdate = Column('birth_date', Date, nullable=False)
+    birthdate = Column('birthdate', Date, nullable=False)
+    gender = Column('gender', String(length=20), nullable=False)
     bio = Column('bio', Text)
+    gpa = Column('gpa', Float, nullable=False)
 
     created_at = Column('created_at', DateTime, default=datetime.now)
     updated_at = Column('updated_at', DateTime, default=datetime.now, onupdate=datetime.now)
@@ -23,3 +25,6 @@ class Student(Base):
     def __repr__(self):
         return f'Student(id={self.student_id}, name="{self.first_name} {self.last_name}")'
     
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'

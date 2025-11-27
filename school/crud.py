@@ -68,3 +68,9 @@ def delete_student(student_id: int):
         with get_db() as session:
             session.delete(student)
             session.commit()
+
+def filter_students_by_gender(gender: str) -> list[Student]:
+    with get_db() as session:
+        result = session.query(Student).filter(Student.gender==gender).all()
+
+    return result

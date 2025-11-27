@@ -6,7 +6,8 @@ from school.crud import (
     get_one_student,
     search_students_by_first_name,
     search_students_by_name,
-    update_student
+    update_student,
+    filter_students_by_gender,
 )
 
 init_db()
@@ -27,3 +28,8 @@ init_db()
 # print(sts)
 
 # update_student(1, last_name='nimadir')
+
+
+females = filter_students_by_gender('Female')
+for female in females:
+    print(female.gender, female.full_name)
